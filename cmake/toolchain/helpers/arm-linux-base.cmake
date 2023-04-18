@@ -8,17 +8,19 @@
 ####
 # Set the system information
 set(CMAKE_SYSTEM_NAME       Linux)
-set(CMAKE_SYSTEM_VERSION    0.1)
+set(CMAKE_SYSTEM_VERSION    0.2)
 
-set(FIND_PROGRAM_INPUTS PATHS "${ARM_TOOLS_PATH}" PATH_SUFFIXES bin REQUIRED)
+set(FIND_INPUTS PATHS "${ARM_TOOLS_PATH}" PATH_SUFFIXES bin REQUIRED)
+set(PREFIX_1 "${CMAKE_SYSTEM_PROCESSOR}-linux-gnu${ARM_TOOL_SUFFIX}")
+set(PREFIX_2 "${CMAKE_SYSTEM_PROCESSOR}-none-linux-gnu${ARM_TOOL_SUFFIX}")
 # Set the GNU ARM toolchain
-find_program(CMAKE_ASM_COMPILER NAMES ${ARM_TOOL_PREFIX}-as ${FIND_PROGRAM_INPUTS})
-find_program(CMAKE_C_COMPILER NAMES ${ARM_TOOL_PREFIX}-gcc ${FIND_PROGRAM_INPUTS})
-find_program(CMAKE_CXX_COMPILER NAMES ${ARM_TOOL_PREFIX}-g++ ${FIND_PROGRAM_INPUTS})
-find_program(CMAKE_AR NAMES ${ARM_TOOL_PREFIX}-ar ${FIND_PROGRAM_INPUTS})
-find_program(CMAKE_OBJCOPY NAMES ${ARM_TOOL_PREFIX}-objcopy ${FIND_PROGRAM_INPUTS})
-find_program(CMAKE_OBJDUMP NAMES ${ARM_TOOL_PREFIX}-objdump ${FIND_PROGRAM_INPUTS})
-message(STATUS "[arm-linux] C Compiler: ${CMAKE_C_COMPILER}")
+find_program(CMAKE_ASM_COMPILER NAMES ${PREFIX_1}-as  ${PREFIX_2}-as  ${FIND_INPUTS})
+find_program(CMAKE_C_COMPILER   NAMES ${PREFIX_1}-gcc ${PREFIX_2}-gcc ${FIND_INPUTS})
+find_program(CMAKE_CXX_COMPILER NAMES ${PREFIX_1}-g++ ${PREFIX_2}-g++ ${FIND_INPUTS})
+find_program(CMAKE_AR           NAMES ${PREFIX_1}-ar  ${PREFIX_2}-ar  ${FIND_INPUTS})
+find_program(CMAKE_OBJCOPY      NAMES ${PREFIX_1}-objcopy ${PREFIX_2}-objcopy ${FIND_INPUTS})
+find_program(CMAKE_OBJDUMP      NAMES ${PREFIX_1}-objdump ${PREFIX_2}-objdump ${FIND_INPUTS})
+message(STATUS "[arm-linux] C   Compiler: ${CMAKE_C_COMPILER}")
 message(STATUS "[arm-linux] CXX Compiler: ${CMAKE_CXX_COMPILER}")
 
 # Force sysroot onto

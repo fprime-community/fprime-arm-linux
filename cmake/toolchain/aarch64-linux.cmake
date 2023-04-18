@@ -15,5 +15,4 @@
 #
 ####
 set(CMAKE_SYSTEM_PROCESSOR "aarch64")
-set(ARM_TOOL_PREFIX aarch64-linux-gnu)
 include("${CMAKE_CURRENT_LIST_DIR}/helpers/arm-linux-base.cmake")

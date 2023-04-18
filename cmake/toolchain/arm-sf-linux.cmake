@@ -16,5 +16,5 @@
 #
 ####
 set(CMAKE_SYSTEM_PROCESSOR "arm")
-set(ARM_TOOL_PREFIX arm-linux-gnueabi)
+set(ARM_TOOL_SUFFIX eabi)
 include("${CMAKE_CURRENT_LIST_DIR}/helpers/arm-linux-base.cmake")
