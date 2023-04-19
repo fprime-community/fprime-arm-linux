@@ -10,7 +10,8 @@
 set(CMAKE_SYSTEM_NAME       Linux)
 set(CMAKE_SYSTEM_VERSION    0.2)
 
-set(FIND_INPUTS PATHS "${ARM_TOOLS_PATH}" PATH_SUFFIXES bin REQUIRED)
+# Check ARM tools path
+set(FIND_INPUTS HINTS ENV ARM_TOOLS_PATH PATH_SUFFIXES bin REQUIRED)
 set(PREFIX_1 "${CMAKE_SYSTEM_PROCESSOR}-linux-gnu${ARM_TOOL_SUFFIX}")
 set(PREFIX_2 "${CMAKE_SYSTEM_PROCESSOR}-none-linux-gnu${ARM_TOOL_SUFFIX}")
 # Set the GNU ARM toolchain
@@ -20,8 +21,13 @@ find_program(CMAKE_CXX_COMPILER NAMES ${PREFIX_1}-g++ ${PREFIX_2}-g++ ${FIND_INP
 find_program(CMAKE_AR           NAMES ${PREFIX_1}-ar  ${PREFIX_2}-ar  ${FIND_INPUTS})
 find_program(CMAKE_OBJCOPY      NAMES ${PREFIX_1}-objcopy ${PREFIX_2}-objcopy ${FIND_INPUTS})
 find_program(CMAKE_OBJDUMP      NAMES ${PREFIX_1}-objdump ${PREFIX_2}-objdump ${FIND_INPUTS})
-message(STATUS "[arm-linux] C   Compiler: ${CMAKE_C_COMPILER}")
-message(STATUS "[arm-linux] CXX Compiler: ${CMAKE_CXX_COMPILER}")
+
+# List programs as found
+if (CMAKE_DEBUG_OUTPUT)
+    message(STATUS "[arm-linux] Assembler:    ${CMAKE_ASM_COMPILER}")
+    message(STATUS "[arm-linux] C   Compiler: ${CMAKE_C_COMPILER}")
+    message(STATUS "[arm-linux] CXX Compiler: ${CMAKE_CXX_COMPILER}")
+endif()
 
 # Force sysroot onto
 if (DEFINED CMAKE_SYSROOT)
