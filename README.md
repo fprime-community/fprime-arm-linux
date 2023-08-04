@@ -1,0 +1,1 @@
+DEPRECATED: These toolchain files are [shipped within F´](https://github.com/nasa/fprime/tree/devel/cmake/toolchain) >= v3.3.0. This package should therefore not be included as a submodule to avoid conflicts.
